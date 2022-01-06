@@ -8,6 +8,7 @@ from .files import zip_file
 from .files import get_files
 
 load_dotenv()
+
 FILES_DIRECTORY = os.getenv('FILES_DIRECTORY')
 if not os.path.exists(FILES_DIRECTORY):
     os.mkdir(FILES_DIRECTORY)
