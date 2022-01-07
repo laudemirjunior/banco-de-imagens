@@ -1,5 +1,10 @@
+app/upload/*
 venv/
 .env
 *.pyc
+<<<<<<< HEAD
 __pycache__
 upload
+=======
+__pycache_
+>>>>>>> d36b5bf5b759ab29d7f6363eedcaa44c0cf5145a
