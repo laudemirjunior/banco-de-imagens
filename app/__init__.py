@@ -44,9 +44,9 @@ def dowload_file_name(file_name):
     except:
         return jsonify(message= "File not supported"), 404
 
-@app.get('/download-zip/<query_params>')
-def download_zip(query_params):
-    road = f'{FILES_DIRECTORY}/{query_params}'
+@app.get('/download-zip')
+def download_zip():
+    query_params = request.args.get("file_extension")
     try:
         zip_file(query_params)
         return jsonify(message = "Success"), 200   
