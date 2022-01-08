@@ -39,17 +39,25 @@ def upload_file():
 
 @app.get('/download/<file_name>')
 def dowload_file_name(file_name):
+    extension = file_name[-3::]
     try:
-        return dowload_file(file_name), 200
+        return dowload_file(file_name, extension), 200
     except:
-        return jsonify(message= "File not supported"), 404
+        if not os.path.exists(f'{FILES_DIRECTORY}/{extension}/{file_name}') and allowed_file(file_name) == True:
+            return jsonify(message= "File not exists"), 409
+        else:
+            return jsonify(message= "File not supported"), 404
 
 @app.get('/download-zip')
 def download_zip():
     query_params = request.args.get("file_extension")
+    directory=f'{FILES_DIRECTORY}/{query_params}'
     try:
-        zip_file(query_params)
-        return jsonify(message = "Success"), 200   
+        if os.listdir(directory) == []:
+            return jsonify(message = "There are no files in the requestor directory"), 409    
+        else:
+            zip_file(query_params, directory)
+            return jsonify(message = "Success"), 200   
     except:
         return jsonify(message="File does not exist"), 404
   

@@ -16,16 +16,14 @@ def allowed_file(filename):
 def save_file(file, extension, filename):
     return file.save(os.path.join(f'{FILES_DIRECTORY}/{extension}', filename))      
 
-def dowload_file(file_name):
-    extension = file_name[-3::]
+def dowload_file(file_name, extension):
     return send_from_directory(
         directory=f'{FILES_DIRECTORY}/{extension}', 
         path=file_name, 
         as_attachment=True
         )
 
-def zip_file(query_params):
-    directory=f'{FILES_DIRECTORY}/{query_params}'
+def zip_file(query_params, directory):
     return shutil.make_archive(f"{DOWNLOAD}/{query_params}", 'zip', directory) 
 
 def get_files():
