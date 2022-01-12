@@ -25,11 +25,6 @@ def dowload_file(file_name, extension):
 
 def zip_file(query_params, directory):
     shutil.make_archive(f"{DOWNLOAD}/{query_params}", 'zip', directory)
-    # return send_from_directory(
-    #     directory='/tmp', 
-    #     path=f'{query_params}.zip', 
-    #     as_attachment=True
-    #     )
 
 def get_files():
     files = []
