@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from werkzeug.utils import secure_filename
 from app.kenzie import allowed_file, save_file, dowload_file, zip_file, get_files
 
@@ -57,7 +57,11 @@ def download_zip():
             return jsonify(message = "There are no files in the requestor directory"), 409    
         else:
             zip_file(query_params, directory)
-            return jsonify(message = "Success"), 200   
+            return send_from_directory(
+            directory='/tmp', 
+            path=f'{query_params}.zip', 
+            as_attachment=True
+            ), 200
     except:
         return jsonify(message="File does not exist"), 404
   
